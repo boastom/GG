@@ -72,11 +72,11 @@ while running:
             sys.exit()
 
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_LEFT] or keys[pygame.K_a]:
         player_x -= player_speed
         if player_x <= 0:
             player_x = SCREEN_WIDTH
-    if keys[pygame.K_RIGHT]:
+    if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
         player_x += player_speed
         if player_x >= SCREEN_WIDTH:
             player_x = 0
