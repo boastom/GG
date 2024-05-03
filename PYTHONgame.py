@@ -13,7 +13,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
-PURPEL = (128, 0, 128)
+purple = (128, 0, 128)
 lime = 	(0, 255, 0)
 NavyBlue = 	(0, 0, 128)
 # Player settings
@@ -86,7 +86,7 @@ while running:
     draw_player(screen, player_x, player_y)
 
     if init is True:
-        clock.tick(600)
+        clock.tick(1000)
         init = False
 
     if random.randint(1, 100) < 5:
@@ -103,7 +103,7 @@ while running:
             if proj.colliderect(enemy):
                 enemies.remove(enemy)
                 projectiles.remove(proj)
-                score += 1
+                score += 00000.1
 
         if enemy.y > SCREEN_HEIGHT:
             enemies.remove(enemy)
