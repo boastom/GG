@@ -1,0 +1,114 @@
+import pygame
+import random
+import sys
+
+# Initialize Pygame
+pygame.init()
+
+# Screen dimensions
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+
+# Colors
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+BLUE = (0, 0, 255)
+
+# Player settings
+player_size = 50
+player_speed = 5
+player_color = RED
+
+# Projectile settings
+proj_size = 5
+proj_speed = 7
+proj_color = WHITE
+
+# Enemy settings
+enemy_size = 50
+enemy_speed = 3
+enemy_color = BLUE
+
+# Initialize screen
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption('Simple Shooter Game')
+
+clock = pygame.time.Clock()
+
+player_x = SCREEN_WIDTH // 2 - player_size // 2
+player_y = SCREEN_HEIGHT - player_size - 10
+
+player_rect = pygame.Rect(player_x, player_y, player_size, player_size)
+projectiles = []
+enemies = []
+
+def create_enemy():
+    x = random.randint(0, SCREEN_WIDTH - enemy_size)
+    y = random.randint(-enemy_size * 2, -enemy_size)
+    enemies.append(pygame.Rect(x, y, enemy_size, enemy_size))
+
+def draw_player(surface, x, y):
+    pygame.draw.rect(surface, player_color, (x, y, player_size, player_size))
+
+def draw_enemy(surface, enemy):
+    pygame.draw.rect(surface, enemy_color, enemy)
+
+def draw_projectile(surface, proj):
+    pygame.draw.rect(surface, proj_color, proj)
+
+# Game loop
+running = True
+score = 0
+font = pygame.font.SysFont(None, 30)
+
+while running:
+    screen.fill(BLACK)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        player_x -= player_speed
+    if keys[pygame.K_RIGHT]:
+        player_x += player_speed
+
+    player_rect.x = player_x
+    draw_player(screen, player_x, player_y)
+
+    if random.randint(1, 100) < 5:
+        create_enemy()
+
+    for enemy in enemies:
+        enemy.y += enemy_speed
+        draw_enemy(screen, enemy)
+
+        if enemy.colliderect(player_rect):
+            running = False
+
+        for proj in projectiles:
+            if proj.colliderect(enemy):
+                enemies.remove(enemy)
+                projectiles.remove(proj)
+                score += 1
+
+        if enemy.y > SCREEN_HEIGHT:
+            enemies.remove(enemy)
+
+    for proj in projectiles:
+        proj.y -= proj_speed
+        draw_projectile(screen, proj)
+
+        if proj.y < 0:
+            projectiles.remove(proj)
+
+    text = font.render("Score: " + str(score), True, WHITE)
+    screen.blit(text, (10, 10))
+
+    pygame.display.flip()
+    clock.tick(60)
+
+pygame.quit()
