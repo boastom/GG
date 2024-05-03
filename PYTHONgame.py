@@ -1,12 +1,11 @@
 import pygame
 import random
 import sys
-
 # Initialize Pygame
 pygame.init()
 
 # Screen dimensions
-SCREEN_WIDTH = 800
+SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 
 # Colors
@@ -14,11 +13,13 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
-
+PURPEL = (128, 0, 128)
+lime = 	(0, 255, 0)
+NavyBlue = 	(0, 0, 128)
 # Player settings
 player_size = 50
 player_speed = 5
-player_color = RED
+player_color = NavyBlue
 
 # Projectile settings
 proj_size = 5
@@ -26,9 +27,9 @@ proj_speed = 7
 proj_color = WHITE
 
 # Enemy settings
-enemy_size = 50
-enemy_speed = 3
-enemy_color = BLUE
+enemy_size = 55
+enemy_speed = 4
+enemy_color = lime
 
 # Initialize screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -73,8 +74,12 @@ while running:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         player_x -= player_speed
+        if player_x <= 0:
+            player_x = SCREEN_WIDTH
     if keys[pygame.K_RIGHT]:
         player_x += player_speed
+        if player_x >= SCREEN_WIDTH:
+            player_x = 0
 
     player_rect.x = player_x
     draw_player(screen, player_x, player_y)
