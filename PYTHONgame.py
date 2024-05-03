@@ -5,7 +5,7 @@ import sys
 pygame.init()
 
 # Screen dimensions
-SCREEN_WIDTH = 1000
+SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
 # Colors
@@ -32,7 +32,7 @@ enemy_speed = 4
 enemy_color = lime
 
 # Initialize screen
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
 pygame.display.set_caption('Simple Shooter Game')
 
 clock = pygame.time.Clock()
@@ -63,6 +63,7 @@ running = True
 score = 0
 font = pygame.font.SysFont(None, 30)
 
+init = True
 while running:
     screen.fill(BLACK)
 
@@ -83,6 +84,10 @@ while running:
 
     player_rect.x = player_x
     draw_player(screen, player_x, player_y)
+
+    if init is True:
+        clock.tick(600)
+        init = False
 
     if random.randint(1, 100) < 5:
         create_enemy()
@@ -114,6 +119,8 @@ while running:
     screen.blit(text, (10, 10))
 
     pygame.display.flip()
+    
     clock.tick(60)
+    score = score  + 1
 
 pygame.quit()
