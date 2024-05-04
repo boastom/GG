@@ -8,6 +8,7 @@ pygame.init()
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
+
 # Colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -81,6 +82,10 @@ while running:
         player_x += player_speed
         if player_x >= SCREEN_WIDTH:
             player_x = 0
+    if keys[pygame.K_UP] or keys[pygame.K_w]:
+        player_y -= player_speed
+        if player_y <= 0:
+            player_y = SCREEN_HEIGHT - player_size - 10
 
     player_rect.x = player_x
     draw_player(screen, player_x, player_y)
