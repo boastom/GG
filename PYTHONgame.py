@@ -37,7 +37,7 @@ proj_speed = 7
 proj_color = WHITE
 
 # Enemy settings
-enemy_size = 60
+enemy_size = 60     
 enemy_speed = 10
 enemy_color = LIME
 
