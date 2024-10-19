@@ -89,7 +89,7 @@ while running:
     player_rect.x = player_x
     draw_player(screen, player_x, player_y)
 
-    if random.randint(1, 100) < 3:
+    if random.randint(1, 100) < 12:
         create_enemy(width, enemy_size)
 
     for enemy in enemies:
@@ -103,7 +103,7 @@ while running:
             if proj.colliderect(enemy):
                 enemies.remove(enemy)
                 projectiles.remove(proj)
-                score += 000000.1
+                score += 00000000.1
 
         if enemy.y > height:
             enemies.remove(enemy)
