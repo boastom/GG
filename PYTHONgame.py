@@ -1,4 +1,4 @@
-# Import the pygame library and initialise the game engine
+   # Import the pygame library and initialise the game engine
 import pygame
 import random
 import sys
@@ -37,8 +37,8 @@ proj_speed = 7
 proj_color = WHITE
 
 # Enemy settings
-enemy_size = 55
-enemy_speed = 4
+enemy_size = 60
+enemy_speed = 10
 enemy_color = LIME
 
 # Initialize Pygame
@@ -103,7 +103,7 @@ while running:
             if proj.colliderect(enemy):
                 enemies.remove(enemy)
                 projectiles.remove(proj)
-                score += 00000.1
+                score += 000000.1
 
         if enemy.y > height:
             enemies.remove(enemy)
